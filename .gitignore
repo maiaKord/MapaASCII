@@ -26,3 +26,22 @@
 *.exe
 *.out
 *.app
+/MapaASCII - bk1-gusanito/Debug
+/MapaASCII - bk1-gusanito/*.opendb
+/MapaASCII - bk1-gusanito/*.sdf
+/MapaASCII - bk1-gusanito/.vs/MapaASCII/v14
+/MapaASCII - bk1-gusanito/MapaASCII/Debug
+/MapaASCII/MapaASCII/Debug
+/MapaASCII/*.opendb
+/MapaASCII/*.sdf
+/MapaASCII/Debug
+/MapaASCII/.vs/*.ini
+/MapaASCII/*.ini
+/MapaASCII - bk1-gusanito/.vs/*.ini
+/MapaASCII - bk1-gusanito/*.ini
+/MapaASCII/.vs/MapaASCII/*.ini
+/MapaASCII/.vs/MapaASCII/v14/*.ini
+/MapaASCII/MapaASCII/*.ini
+/MapaASCII - bk1-gusanito/.vs/MapaASCII
+/MapaASCII - bk1-gusanito/MapaASCII/*.ini
+/MapaASCII/.vs/MapaASCII/v14

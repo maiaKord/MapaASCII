@@ -45,3 +45,8 @@
 /MapaASCII - bk1-gusanito/.vs/MapaASCII
 /MapaASCII - bk1-gusanito/MapaASCII/*.ini
 /MapaASCII/.vs/MapaASCII/v14
+*.ini
+Debug
+*.opendb
+v14
+*.sdf

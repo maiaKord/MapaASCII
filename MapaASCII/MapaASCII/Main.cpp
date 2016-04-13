@@ -23,16 +23,15 @@ void main()
 	{
 		// Tile represent the terrain material
 		_mapTile.init(1920, 1980);
-		_mapTile.print(&_screen.pixels[0][0], BACKBUFFER_HEIGHT, BACKBUFFER_WIDTH, _screenPosition);
+		_mapTile.print(&_screen.pixels[0][0], BACKBUFFER_WIDTH, (BACKBUFFER_HEIGHT - 1)*BACKBUFFER_WIDTH, _screenPosition);
 
 		// Entity Static represent different objects that can't move like a building, flowers, others
 		_mapEntityStatic.init(1920, 1980);
-		_mapEntityStatic.print(&_screen.pixels[0][0], BACKBUFFER_HEIGHT, BACKBUFFER_WIDTH, _screenPosition);
+		_mapEntityStatic.print(&_screen.pixels[0][0], BACKBUFFER_WIDTH, (BACKBUFFER_HEIGHT-1)*BACKBUFFER_WIDTH, _screenPosition);
 
 		// Entity Dynamic represent different objects that can move like a cat, cars, others
 		_mapEntityDynamic.init(1920, 1980);
-		_mapEntityDynamic.print(&_screen.pixels[0][0], BACKBUFFER_HEIGHT, BACKBUFFER_WIDTH, _screenPosition);
-
+		_mapEntityDynamic.print(&_screen.pixels[0][0], BACKBUFFER_WIDTH, (BACKBUFFER_HEIGHT - 1)*BACKBUFFER_WIDTH, _screenPosition);
 
 		// moving the cursor in base of the keys up, down, right and left
 
@@ -58,8 +57,8 @@ void main()
 
 		// check the limit and fix the position
 
-		if ( _cursor.y >= BACKBUFFER_HEIGHT)
-			_cursor.y = BACKBUFFER_HEIGHT - 1;
+		if ( _cursor.y >= BACKBUFFER_HEIGHT - 1)
+			_cursor.y = BACKBUFFER_HEIGHT - 2;
 
 		if (_cursor.y < 0 )
 			_cursor.y = 0;
@@ -73,8 +72,14 @@ void main()
 		// draw the cursor
 		_screen.pixels[_cursor.y][_cursor.x] = '#';
 
+		// to indicated the end of the string
+		_screen.pixels[BACKBUFFER_HEIGHT - 1][BACKBUFFER_WIDTH - 1] = 0;
+		
 		// draw the screen
 		_screen.print();
+
+		// to fix screen is necesary do a carrier return
+		printf("\n");
 		
 		// this is necesary to don't see tearing. This happent because we don't write directly in the console
 		Sleep(100);

@@ -1,7 +1,7 @@
 #pragma once
 
 #define BACKBUFFER_WIDTH 80
-#define BACKBUFFER_HEIGHT 24
+#define BACKBUFFER_HEIGHT 25
 
 struct Screen
 {

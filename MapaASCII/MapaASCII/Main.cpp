@@ -2,6 +2,8 @@
 #include <Windows.h>
 #include "Map.h"
 #include "Screen.h"
+#include "Utils.h"
+#include "Settings.h"
 
 struct Cursor 
 {
@@ -12,27 +14,37 @@ struct Cursor
 void main()
 {
 	bool _running = true;
+
+	Settings _settings;
+	_settings.load();
+
 	Screen _screen;
+	_screen.init( BACKBUFFER_WIDTH, BACKBUFFER_HEIGHT);
+	
 	Map<char> _mapTile;
-	Map<int> _mapEntityStatic;
-	Map<int> _mapEntityDynamic;
+	//Map<int> _mapEntityStatic;
+	//Map<int> _mapEntityDynamic;
+
 	Cursor _cursor;
 	Vector _screenPosition = {0,0};
 
+	// Tile represent the terrain material
+	_mapTile.init(1920, 1980);
+
+	// Entity Static represent different objects that can't move like a building, flowers, others
+	//_mapEntityStatic.init(1920, 1980);
+
+	// Entity Dynamic represent different objects that can move like a cat, cars, others
+	//_mapEntityDynamic.init(1920, 1980);
+
 	while (_running)
 	{
-		// Tile represent the terrain material
-		_mapTile.init(1920, 1980);
 		_mapTile.print(&_screen.pixels[0][0], BACKBUFFER_WIDTH, (BACKBUFFER_HEIGHT - 1)*BACKBUFFER_WIDTH, _screenPosition);
+		//_mapEntityStatic.print(&_screen.pixels[0][0], BACKBUFFER_WIDTH, (BACKBUFFER_HEIGHT-1)*BACKBUFFER_WIDTH, _screenPosition);
+		//_mapEntityDynamic.print(&_screen.pixels[0][0], BACKBUFFER_WIDTH, (BACKBUFFER_HEIGHT - 1)*BACKBUFFER_WIDTH, _screenPosition);
 
-		// Entity Static represent different objects that can't move like a building, flowers, others
-		_mapEntityStatic.init(1920, 1980);
-		_mapEntityStatic.print(&_screen.pixels[0][0], BACKBUFFER_WIDTH, (BACKBUFFER_HEIGHT-1)*BACKBUFFER_WIDTH, _screenPosition);
 
-		// Entity Dynamic represent different objects that can move like a cat, cars, others
-		_mapEntityDynamic.init(1920, 1980);
-		_mapEntityDynamic.print(&_screen.pixels[0][0], BACKBUFFER_WIDTH, (BACKBUFFER_HEIGHT - 1)*BACKBUFFER_WIDTH, _screenPosition);
-
+		//**********************
 		// moving the cursor in base of the keys up, down, right and left
 
 		if (GetAsyncKeyState(VK_UP))
@@ -82,7 +94,7 @@ void main()
 		printf("\n");
 		
 		// this is necesary to don't see tearing. This happent because we don't write directly in the console
-		Sleep(100);
+		Sleep(200);
 
 		// press the scape key to exit
 		if ( GetAsyncKeyState(VK_ESCAPE) )

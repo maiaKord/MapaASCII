@@ -17,133 +17,40 @@ class Settings
 	std::string _screenHeight = "";
 	std::string _screenWidth = "";
 
-	public:
+public:
 
-	void load() 
-	{
-		size_t pos = 0;
-		for (int x = 0; x < 6; x++)
-		{
-			pos = _config.find("\n");
+	void load();
 
-			switch (x)
-			{
-			case 1:
-				_superiorLatitude = _config.substr(0, pos);
-				break;
-			case 2:
-				_inferiorLatitude = _config.substr(0, pos);
-				break;
-			case 3:
-				_leftLongitude = _config.substr(0, pos);
-				break;
-			case 4:
-				_rightLongitude = _config.substr(0, pos);
-				break;
-			case 5:
-				_screenHeight = _config.substr(0, pos);
-				break;
-			case 6:
-				_screenWidth = _config.substr(0, pos);
-				break;
-			default:
-				break;
-			}
 
-			_config = _config.substr(pos + 1);
-		}
-	}
-
-	// *************************
 	// encapsule
 
-	std::string getFilePath()
-	{
-		return _filePath;
-	}
-	void setFilePath(std::string value)
-	{
-		_filePath = value;
-	}
+	std::string getFilePath();
+	void setFilePath(std::string value);
 
-	std::string getFileName()
-	{
-		return _fileName;
-	}
-	void setFileName(std::string value)
-	{
-		_fileName = value;
-	}
+	std::string getFileName();
+	void setFileName(std::string value);
 
-	std::string getFullPath()
-	{
-		return _fullPath;
-	}
-	void setFullPath(std::string value)
-	{
-		_fullPath = value;
-	}
+	std::string getFullPath();
+	void setFullPath(std::string value);
 
-	std::string getConfig()
-	{
-		return _config;
-	}
-	void setConfig(std::string value)
-	{
-		_config = value;
-	}
+	std::string getConfig();
+	void setConfig(std::string value);
 
-	std::string getSuperiorLatitude()
-	{
-		return _superiorLatitude;
-	}
-	void setSuperiorLatitude(std::string value)
-	{
-		_superiorLatitude = value;
-	}
+	std::string getSuperiorLatitude();
+	void setSuperiorLatitude(std::string value);
 
-	std::string getInferiorLatitude()
-	{
-		return _inferiorLatitude;
-	}
-	void setInferiorLatitude(std::string value)
-	{
-		_inferiorLatitude = value;
-	}
+	std::string getInferiorLatitude();
+	void setInferiorLatitude(std::string value);
 	
-	std::string getLeftLongitude()
-	{
-		return _leftLongitude;
-	}
-	void setLeftLongitude(std::string value)
-	{
-		_leftLongitude = value;
-	}
+	std::string getLeftLongitude();
+	void setLeftLongitude(std::string value);
 
-	std::string getRightLongitude()
-	{
-		return _rightLongitude;
-	}
-	void setRightLongitude(std::string value)
-	{
-		_rightLongitude = value;
-	}
+	std::string getRightLongitude();
+	void setRightLongitude(std::string value);
 
-	std::string getScreenHeight()
-	{
-		return _screenHeight;
-	}
-	void setScreenHeight(std::string value)
-	{
-		_screenHeight = value;
-	}
+	int getScreenHeight();
+	void setScreenHeight(std::string value);
 
-	std::string getScreenWidth()
-	{
-		return _screenWidth;
-	}
-	void setScreenWidth(std::string value)
-	{
-		_screenWidth = value;
-	}
+	int getScreenWidth();
+	void setScreenWidth(std::string value);
 };

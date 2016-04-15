@@ -54,57 +54,6 @@ public:
 			}
 		}
 	}
-	
-	// ***************************
-	// encapsulation
-
-	_tileType getTile(int x, int z)
-	{
-		MapLayer<_tileType>* capa = _layers[z / 16][x / 16];
-
-		if ( capa == 0 )
-		{
-			return '~';
-		}
-
-		// transform input coordinates to layer space
-		return capa->tiles[z % 16][x % 16];
-	}
-
-	void setTile(int x, int z, _tileType type)
-	{	
-		if ( _layers[z / 16][x / 16] == 0)
-		{
-			// if not exists, create it
-			_layers[z / 16][x / 16] = new MapLayer<_tileType>();
-		}
-		
-		// if exists, change it
-		_layers[z / 16][x / 16]->tiles[z % 16][x % 16] = type;
-	}
-
-	int getWidth()
-	{
-		return _width;
-	}
-
-	void setWidth( int width)
-	{
-		_width = width;
-	}
-
-	int getHeight()
-	{
-		return _height;
-	}
-
-	void setHeight(int height)
-	{
-		_height = height;
-	}
-
-	// ***************************
-	// methods
 
 	int print(char* pixels, int maxWidth, int maxPixels, Vector position)
 	{
@@ -123,6 +72,52 @@ public:
 		return 0;
 	}
 
+	// ***************************
+	// encapsule
+
+	int getWidth()
+	{
+		return _width;
+	}
+
+	void setWidth(int width)
+	{
+		_width = width;
+	}
+
+	int getHeight()
+	{
+		return _height;
+	}
+
+	void setHeight(int height)
+	{
+		_height = height;
+	}
 	
+	_tileType getTile(int x, int z)
+	{
+		MapLayer<_tileType>* capa = _layers[z / 16][x / 16];
+
+		if (capa == 0)
+		{
+			return '~';
+		}
+
+		// transform input coordinates to layer space
+		return capa->tiles[z % 16][x % 16];
+	}
+
+	void setTile(int x, int z, _tileType type)
+	{
+		if (_layers[z / 16][x / 16] == 0)
+		{
+			// if not exists, create it
+			_layers[z / 16][x / 16] = new MapLayer<_tileType>();
+		}
+
+		// if exists, change it
+		_layers[z / 16][x / 16]->tiles[z % 16][x % 16] = type;
+	}
 
 };

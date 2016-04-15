@@ -8,6 +8,12 @@ Screen::Screen(int screenWidth, int screenHeight)
 	_pixels = (char*)malloc(_backBufferHeight * _backBufferWidth);
 }
 
+Screen::~Screen()
+{
+	if(_pixels)
+		free(_pixels);
+}
+
 void Screen::init()
 {
 	CONSOLE_SCREEN_BUFFER_INFOEX csbiInfo = {};

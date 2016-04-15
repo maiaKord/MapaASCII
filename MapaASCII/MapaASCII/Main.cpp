@@ -9,12 +9,28 @@ struct Cursor
 {
 	int x = 1;
 	int y = 1;
+
+	void fixPosition(int maxWidth, int maxHeight)
+	{
+		y = min(y, maxHeight - 1);
+		y = max(y, 0);
+
+		x = min(x, maxWidth - 1);
+		x = max(x, 0);
+	}
+
 };
 
 void main()
 {
+	// console warning if I forget release ram
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_DELAY_FREE_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+		//_CrtSetBreakAlloc(758);
+
 	bool _running = true;
-	
+	Cursor _cursor;
+	Vector _screenPosition = { 0,0 };
+
 	Settings _settings;
 	_settings.load();
 
@@ -22,66 +38,31 @@ void main()
 	_screen->init();
 	
 	Map<char> _mapTile;
-	//Map<int> _mapEntityStatic;
-	//Map<int> _mapEntityDynamic;
-
-	Cursor _cursor;
-	Vector _screenPosition = {0,0};
-
 	// Tile represent the terrain material
 	_mapTile.init(1920, 1980);
-
-	// Entity Static represent different objects that can't move like a building, flowers, others
-	//_mapEntityStatic.init(1920, 1980);
-
-	// Entity Dynamic represent different objects that can move like a cat, cars, others
-	//_mapEntityDynamic.init(1920, 1980);
-
+	
 	while (_running)
 	{
 		int _screenWidth = _screen->getBackBufferWidth();
 		int _screenHeight = _screen->getBackBufferHeight();
 
 		_mapTile.print(_screen->getPixels(), _screenWidth, (_screenHeight - 1) * _screenWidth, _screenPosition);
-		//_mapEntityStatic.print(&_screen.pixels[0][0], BACKBUFFER_WIDTH, (BACKBUFFER_HEIGHT-1)*BACKBUFFER_WIDTH, _screenPosition);
-		//_mapEntityDynamic.print(&_screen.pixels[0][0], BACKBUFFER_WIDTH, (BACKBUFFER_HEIGHT - 1)*BACKBUFFER_WIDTH, _screenPosition);
-
-
-		//**********************
+		
 		// move the cursor in base of the keys up, down, right and left
 		if (GetAsyncKeyState(VK_UP))
-		{
 			_cursor.y -= 1;
-		}
 
 		if (GetAsyncKeyState(VK_DOWN))
-		{
 			_cursor.y += 1;
-		}
 
 		if (GetAsyncKeyState(VK_RIGHT))
-		{
 			_cursor.x += 1;
-		}
 
 		if (GetAsyncKeyState(VK_LEFT))
-		{
 			_cursor.x -= 1;
-		}
 
 		// check the limit and fix the position
-
-		if ( _cursor.y >= _screenHeight - 1)
-			_cursor.y = _screenHeight - 2;
-
-		if (_cursor.y < 0 )
-			_cursor.y = 0;
-
-		if (_cursor.x >= _screenWidth)
-			_cursor.x = _screenWidth - 1;
-
-		if (_cursor.x < 0)
-			_cursor.x = 0;
+		_cursor.fixPosition(_screenWidth , _screenHeight);
 
 		// draw the cursor
 		_screen->getPixels() [_cursor.y * _screenWidth + _cursor.x] = '#';
@@ -94,8 +75,9 @@ void main()
 
 		// press the scape key to exit
 		if ( GetAsyncKeyState(VK_ESCAPE) )
-		{
 			_running = false;
-		}
 	}
+	
+	if( _screen)
+		delete(_screen);
 }

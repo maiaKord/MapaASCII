@@ -10,6 +10,7 @@ class Screen
 
 public:
 	Screen(int screenWidth, int screenHeight);
+	~Screen();
 
 	void init( );
 	void print();

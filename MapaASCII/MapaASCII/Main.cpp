@@ -29,7 +29,7 @@ void main()
 
 	bool _running = true;
 	Cursor _cursor;
-	Vector _screenPosition = { 0,0 };
+	SVector2D _screenPosition = { 0,0 };
 
 	Settings _settings;
 	_settings.load();

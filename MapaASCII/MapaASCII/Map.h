@@ -23,7 +23,7 @@ template<typename _tileType>class Map
 	MapLayer<_tileType> *_layers[MAP_HEIGHT][MAP_WIDTH];
 	int _height = 0;
 	int _width = 0;
-	Vector _positionViewPort = {0,0};
+	SVector2D _positionViewPort = {0,0};
 
 public:
 	Map()
@@ -55,7 +55,7 @@ public:
 		}
 	}
 
-	int print(char* pixels, int maxWidth, int maxPixels, Vector position)
+	int print(char* pixels, int maxWidth, int maxPixels, SVector2D position)
 	{
 		int height = maxPixels / maxWidth;
 		 

@@ -1,15 +1,26 @@
 #pragma once
 #include <string>
+#include "Utils.h"
 
 class MapLoader 
 {
-	std::string _input = "";
+	std::string _filePath = "./";
+	std::string _fileName = "settings.txt";
+	std::string _fullPath = _filePath + _fileName;
 
-	public:
+	std::string _config = Utils::readTextFile(_fullPath.c_str());
 
-	std::string getInput()
-	{
-		return _input;
-	}
+
+
+public:
+
+	std::string getFilePath();
+	void setFilePath(std::string value);
+
+	std::string getFileName();
+	void setFileName(std::string value);
+
+	std::string getFullPath();
+	void setFullPath(std::string value);
 
 };

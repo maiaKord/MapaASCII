@@ -148,13 +148,17 @@
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="MapLoader.cpp" />
     <ClCompile Include="Screen.cpp" />
     <ClCompile Include="Settings.cpp" />
+    <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapLoader.h" />
+    <ClInclude Include="MapObject.h" />
     <ClInclude Include="Screen.h" />
     <ClInclude Include="Settings.h" />
     <ClInclude Include="Tile.h" />

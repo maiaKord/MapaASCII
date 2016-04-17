@@ -1,6 +1,6 @@
 #include "Tile.h"
 
-const Tile Tile::defaults[TILE_SIZE_MAX] = {
+const Tile Tile::defaults[TILE_COUNT] = {
 	{ 'm', "manzana",				"Elemento básico en la definición de un mapa de ciudad, permite ubicar edificaciones, parques y árboles en el mapa." },
 	{ 'b', "boulevard",				"Se encuentra en distintas calles como divisor entre carriles pudiendo contener" },
 	{ 'e', "edificio-privado",		"Contempla una estructura edilicia privada o pública. No se posee información sobre los interiores de la edificación sino sobre los límites inscriptos en el catastro local.Los edificios públicos tienen una particularidad : poseen nombre que debe ser impreso al usuario a modo de leyenda para su ubicación." },

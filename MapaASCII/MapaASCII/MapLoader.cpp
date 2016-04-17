@@ -42,7 +42,7 @@ void MapLoader::parseEntity(std::string line, Entity** entity)
 
 void MapLoader::parseIdentifier( std::string identifier, Entity** _entity)
 {
-	for ( int x = 0; x < TILE_SIZE_MAX; x++)
+	for ( int x = 0; x < TILE_COUNT; x++)
 	{
 		if ( Tile::defaults[x].character == 0 )
 			break;

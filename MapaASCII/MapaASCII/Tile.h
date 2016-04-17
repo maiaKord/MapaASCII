@@ -1,17 +1,21 @@
 #pragma once
 #include <string>
-#include "MapObject.h"
 
-struct Tile : MapObject
+#define TILE_COUNT 255
+
+struct Tile
 {
-	char character = ' ';
-	static const Tile defaults[256];
+	char character = 0;
+	std::string identifier = "";
+	std::string description = "";
+	static const Tile defaults[TILE_COUNT];
 	
 	Tile(){}
 
 	Tile(char vCharacter, std::string vIdentifier, std::string vDescription)
-		:MapObject(vIdentifier, vDescription)
 	{
 		character = vCharacter;
+		identifier = vIdentifier;
+		description = vDescription;
 	}
 };

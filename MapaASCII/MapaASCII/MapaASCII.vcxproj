@@ -158,7 +158,6 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapLoader.h" />
-    <ClInclude Include="MapObject.h" />
     <ClInclude Include="Screen.h" />
     <ClInclude Include="Settings.h" />
     <ClInclude Include="Tile.h" />

@@ -1,26 +1,17 @@
 #pragma once
 #include <string>
 #include "Utils.h"
+#include "Map.h"
+#include "Entity.h"
 
 class MapLoader 
 {
-	std::string _filePath = "./";
-	std::string _fileName = "settings.txt";
-	std::string _fullPath = _filePath + _fileName;
-
-	std::string _config = Utils::readTextFile(_fullPath.c_str());
-
-
 
 public:
+	void load( std::string vFullPath, Map<char>* vMap );
 
-	std::string getFilePath();
-	void setFilePath(std::string value);
-
-	std::string getFileName();
-	void setFileName(std::string value);
-
-	std::string getFullPath();
-	void setFullPath(std::string value);
-
+	void parseEntity(std::string line, Entity** entity);
+	void parseIdentifier(std::string identifier, Entity** _entity);
+	void parsePolygon(std::string line, EntityPolygon* _entity);
+	void parseCircle(std::string line, EntityCircle* _entity);
 };

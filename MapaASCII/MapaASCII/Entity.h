@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 #include "Vector.h"
-#include "MapObject.h"
+#include "Tile.h"
 
 // types of tiles
 enum ENTITY_SHAPE
@@ -14,16 +14,32 @@ enum ENTITY_SHAPE
 	ENTITY_SHAPE_NONE
 };
 
-struct Entity : MapObject
+struct Entity
 {
+	const Tile* tile = nullptr;
 	ENTITY_SHAPE shape = ENTITY_SHAPE_NONE;
-	std::vector<SVector2D> _pointList;
-
+	
 	Entity(){}
 
-	Entity(ENTITY_SHAPE vShape, std::string vIdentifier, std::string vDescription)
-		:MapObject(vIdentifier, vDescription)
+	Entity(ENTITY_SHAPE vShape, Tile* vTile)
 	{
 		shape = vShape;
+		tile = vTile;
 	}
+	virtual ~Entity(){}
+};
+
+struct EntityCircle : Entity
+{
+	SVector2Df circlePosition;
+	float circleRadius;
+
+	EntityCircle(){}
+};
+
+struct EntityPolygon : Entity
+{
+	std::vector<SVector2Df> _pointList;
+
+	EntityPolygon() {}
 };

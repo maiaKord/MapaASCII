@@ -3,7 +3,8 @@
 #include "Map.h"
 #include "Screen.h"
 #include "Utils.h"
-#include "Settings.h"
+#include "SettingsViewPort.h"
+#include "EntityLoader.h"
 
 struct Cursor 
 {
@@ -31,23 +32,34 @@ void main()
 	Cursor _cursor;
 	SVector2D _screenPosition = { 0,0 };
 
-	Settings _settings;
-	_settings.load();
+	SettingsViewPort _settingsVP;
+	_settingsVP.load();
 
-	Screen* _screen = new Screen( _settings.getScreenWidth(), _settings.getScreenHeight() );
+	Screen* _screen = new Screen( _settingsVP.getScreenWidth(), _settingsVP.getScreenHeight() );
 	_screen->init();
+
+
+	// Creation of the Map to show up in console
+
+	Map<char>* _mapTile = new Map<char>;	// Tile represent the terrain material
+	_mapTile->init(1920, 1980); 
+
+	std::string _filePath = "./";
+	std::string _fileName = "settings.txt";
+	std::string _fullPath = _filePath + _fileName;
 	
-	Map<char> _mapTile;
-	// Tile represent the terrain material
-	_mapTile.init(1920, 1980);
+	//std::vector<Entity*> _entityList;
+
+	//EntityLoader _entityLoader;
+	//_entityLoader.load(_fullPath, _entityList);
 	
 	while (_running)
 	{
 		int _screenWidth = _screen->getBackBufferWidth();
 		int _screenHeight = _screen->getBackBufferHeight();
 
-		_mapTile.print(_screen->getPixels(), _screenWidth, (_screenHeight - 1) * _screenWidth, _screenPosition);
-		
+		_mapTile->print(_screen->getPixels(), _screenWidth, _screenHeight * _screenWidth, _screenPosition);
+
 		// move the cursor in base of the keys up, down, right and left
 		if (GetAsyncKeyState(VK_UP))
 			_cursor.y -= 1;
@@ -71,7 +83,7 @@ void main()
 		_screen->print();
 				
 		// this is necesary to don't see tearing. This happent because we don't write directly in the console
-		Sleep(20);
+		Sleep(70);
 
 		// press the scape key to exit
 		if ( GetAsyncKeyState(VK_ESCAPE) )
@@ -80,4 +92,6 @@ void main()
 	
 	if( _screen)
 		delete(_screen);
+	if (_mapTile)
+		delete(_mapTile);
 }

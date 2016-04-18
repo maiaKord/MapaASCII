@@ -146,9 +146,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="EntityRenderer.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Map.cpp" />
-    <ClCompile Include="MapLoader.cpp" />
+    <ClCompile Include="EntityLoader.cpp" />
     <ClCompile Include="Screen.cpp" />
     <ClCompile Include="Settings.cpp" />
     <ClCompile Include="Tile.cpp" />
@@ -156,10 +156,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="EntityRenderer.h" />
     <ClInclude Include="Map.h" />
-    <ClInclude Include="MapLoader.h" />
+    <ClInclude Include="EntityLoader.h" />
     <ClInclude Include="Screen.h" />
-    <ClInclude Include="Settings.h" />
+    <ClInclude Include="SettingsViewPort.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vector.h" />

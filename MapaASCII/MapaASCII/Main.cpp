@@ -1,3 +1,5 @@
+#define NOMINMAX
+
 #include <cstdio>
 #include <Windows.h>
 #include "Application.h"

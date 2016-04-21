@@ -1,4 +1,5 @@
 #pragma once
+#include <algorithm>
 #include "Map.h"
 #include "Screen.h"
 #include "Utils.h"
@@ -13,11 +14,11 @@ struct Cursor
 
 	void fixPosition(int maxWidth, int maxHeight)
 	{
-		y = min(y, maxHeight - 1);
-		y = max(y, 0);
+		y = std::min(y, maxHeight - 1);
+		y = std::max(y, 0);
 
-		x = min(x, maxWidth - 1);
-		x = max(x, 0);
+		x = std::min(x, maxWidth - 1);
+		x = std::max(x, 0);
 	}
 };
 
@@ -28,6 +29,8 @@ struct Application
 	SettingsViewPort _settingsVP;
 	Screen* _screen = nullptr;
 	Map<char>* _mapTile = nullptr;
+	std::vector<Entity*> _entityList;
+	EntityRenderer* _eRender = nullptr;
 	
 	Application() { }
 
@@ -37,6 +40,11 @@ struct Application
 			delete(_screen);
 		if (_mapTile)
 			delete(_mapTile);
+		if (_eRender)
+			delete(_eRender);
+		
+		for(Entity* e : _entityList)
+			delete(e);
 	}
 
 	void init () 
@@ -52,8 +60,6 @@ struct Application
 		std::string _filePath = "./";
 		std::string _fileName = "map1.txt";
 		std::string _fullPath = _filePath + _fileName;
-
-		std::vector<Entity*> _entityList;
 
 		EntityLoader _entityLoader;
 		_entityLoader.load(_fullPath, _entityList);
@@ -78,6 +84,7 @@ struct Application
 			}
 		}
 
+		_eRender->init(_entityList, _mapTile);
 	}
 
 	void update()

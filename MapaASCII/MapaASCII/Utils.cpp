@@ -1,5 +1,6 @@
 #include "Utils.h"
 #include <math.h>
+#include <algorithm>
 
 # define M_PI 3.14159265358979323846  /* pi */
 
@@ -45,6 +46,40 @@ void Utils::convertGeoToMeters(const std::vector<SVector2Df>& listPointsGeo, std
 	}
 }
 
+BoundingSquare Utils::calculateBoundingSquare(SVector2Df point, float radio)
+{
+	BoundingSquare bs;
+	
+	bs._pointMax = point + SVector2Df(radio,radio);
+	bs._pointMin = point - SVector2Df(radio, radio);;
+
+	return bs;
+}
+
+BoundingSquare Utils::calculateBoundingSquare(std::vector<SVector2Df> listPoints )
+{
+	BoundingSquare bs;
+	bs._pointMax = {0,0};
+	bs._pointMin = { 0,0 };
+
+	if ( listPoints.size() )
+	{
+		bs._pointMax = listPoints[0];
+		bs._pointMin = listPoints[0];
+
+		for( SVector2Df p : listPoints )
+		{
+			bs._pointMax.x = std::max(p.x, bs._pointMax.x);
+			bs._pointMax.z = std::max(p.z, bs._pointMax.z);
+
+			bs._pointMin.x = std::min(p.x, bs._pointMin.x);
+			bs._pointMin.z = std::min(p.z, bs._pointMin.z);
+		}
+	}
+
+	return bs;
+}
+
 //Rasterizing a 2D polygon using even-odd rule (https://en.wikipedia.org/wiki/Even%E2%80%93odd_rule)
 bool Utils::isPointInPath( SVector2Df point, std::vector<SVector2Df> listPoints)
 {
@@ -61,6 +96,7 @@ bool Utils::isPointInPath( SVector2Df point, std::vector<SVector2Df> listPoints)
 			c = !c;
 			
 		j = i;
+		i++;
 	}
 
 	return c;

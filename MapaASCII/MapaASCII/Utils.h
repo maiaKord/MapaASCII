@@ -1,4 +1,7 @@
 #pragma once
+
+#define NOMINMAX
+
 #include <string>
 #include <fstream>
 #include <vector>
@@ -12,5 +15,7 @@ namespace Utils
 	SVector2Df convertGeoToMeters( SVector2Df p1 );
 	void convertGeoToMeters(const std::vector<SVector2Df>& listPointsGeo, std::vector<SVector2Df>& listPointsMeters);
 	
+	BoundingSquare calculateBoundingSquare(std::vector<SVector2Df> listPoints);
+	BoundingSquare calculateBoundingSquare(SVector2Df point, float radio);
 	bool isPointInPath(SVector2Df point, std::vector<SVector2Df> listPoints);
 }

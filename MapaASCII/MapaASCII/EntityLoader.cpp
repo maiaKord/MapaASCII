@@ -20,6 +20,7 @@ void EntityLoader::parseEntity(std::string line, Entity** entity)
 {
 	Entity* _entity = nullptr;
 	size_t pos = 0;
+	int amountPublicBuilding = 0;
 	
 	pos = line.find(",");
 	std::string identifier = line.substr(0,pos);
@@ -32,12 +33,15 @@ void EntityLoader::parseEntity(std::string line, Entity** entity)
 		case ENTITY_SHAPE_POLYGON:
 		case ENTITY_SHAPE_SQUARE:
 		case ENTITY_SHAPE_TRIANGLE:
-			if ( _entity->tile->identifier.compare("edificio­publico") )
-			{
+			if ( _entity->tile->identifier.compare("edificio-publico") == 0 ) //esta entrando por lo que no son !!
+			{	
 				pos = line.find(",");
 				std::string name = line.substr(0, pos);
 				line = line.substr(pos + 1);
 				_entity->name = name;
+
+				_entity->characterOverride = _entity->tile->character + amountPublicBuilding;
+				amountPublicBuilding ++;
 			}
 			parsePolygon(line, dynamic_cast<EntityPolygon*>(_entity));
 		break;
@@ -58,17 +62,22 @@ void EntityLoader::parseIdentifier( std::string identifier, Entity** _entity)
 
 		if ( identifier.compare(Tile::defaults[x].identifier) == 0 )
 		{
-			if (identifier.compare("manzana") || identifier.compare("boulevard") || identifier.compare("edificio-privado") || identifier.compare("edificio-publico") || identifier.compare("agua"))
+			if (identifier.compare("manzana") == 0 || 
+				identifier.compare("boulevard") == 0 || 
+				identifier.compare("edificio-privado") == 0 || 
+				identifier.compare("edificio-publico") == 0 || 
+				identifier.compare("agua") == 0)
 			{
 				*_entity = new EntityPolygon();
 				(*_entity)->shape = ENTITY_SHAPE_POLYGON;
 			}
-			else if (identifier.compare("arbol") || identifier.compare("semaforo"))
+			else if (identifier.compare("arbol") == 0 || 
+					identifier.compare("semaforo") == 0)
 			{
 				*_entity = new EntityCircle();
 				(*_entity)->shape = ENTITY_SHAPE_CIRCLE;
 			}
-			else if (identifier.compare("No definido"))
+			else if (identifier.compare("No definido") == 0 )
 			{
 				*_entity = new Entity();
 				(*_entity)->shape = ENTITY_SHAPE_NONE;

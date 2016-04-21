@@ -17,8 +17,10 @@ enum ENTITY_SHAPE
 struct Entity
 {
 	const Tile* tile = nullptr;
+	char characterOverride = 0;
 	std::string name = "";
 	ENTITY_SHAPE shape = ENTITY_SHAPE_NONE;
+	BoundingSquare* boundingSquare;
 	
 	Entity(){}
 

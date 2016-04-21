@@ -31,4 +31,37 @@ struct SVector2Df
 		x = std::stof(vX);
 		z = std::stof(vZ);
 	}
+
+	float lenght()
+	{
+		float distance = sqrt((float)x*x + z*z);
+
+		return distance;
+	}
+	
+	SVector2Df operator + (SVector2Df v )
+	{
+		SVector2Df r;
+
+		r.x = x + v.x;
+		r.z = z + v.z;
+
+		return r;
+	}
+	
+	SVector2Df operator - (SVector2Df v)
+	{
+		SVector2Df r;
+
+		r.x = x - v.x;
+		r.z = z - v.z;
+
+		return r;
+	}
+};
+
+struct BoundingSquare
+{
+	SVector2Df _pointMin;
+	SVector2Df _pointMax;
 };

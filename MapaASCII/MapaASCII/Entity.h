@@ -17,6 +17,7 @@ enum ENTITY_SHAPE
 struct Entity
 {
 	const Tile* tile = nullptr;
+	std::string name = "";
 	ENTITY_SHAPE shape = ENTITY_SHAPE_NONE;
 	
 	Entity(){}
@@ -31,15 +32,17 @@ struct Entity
 
 struct EntityCircle : Entity
 {
-	SVector2Df circlePosition;
-	float circleRadius;
+	SVector2Df circlePositionGeo;
+	SVector2Df circlePositionMeters;
+	float circleRadiusMeters;
 
 	EntityCircle(){}
 };
 
 struct EntityPolygon : Entity
 {
-	std::vector<SVector2Df> _pointList;
+	std::vector<SVector2Df> _pointListGeo;
+	std::vector<SVector2Df> _pointListMeters;
 
 	EntityPolygon() {}
 };

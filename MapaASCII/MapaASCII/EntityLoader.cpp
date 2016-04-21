@@ -18,7 +18,7 @@ void EntityLoader::load(std::string vFullPath, std::vector<Entity*>& listEntity)
 
 void EntityLoader::parseEntity(std::string line, Entity** entity)
 {
-	Entity* _entity;
+	Entity* _entity = nullptr;
 	size_t pos = 0;
 	
 	pos = line.find(",");
@@ -32,6 +32,13 @@ void EntityLoader::parseEntity(std::string line, Entity** entity)
 		case ENTITY_SHAPE_POLYGON:
 		case ENTITY_SHAPE_SQUARE:
 		case ENTITY_SHAPE_TRIANGLE:
+			if ( _entity->tile->identifier.compare("edificio­publico") )
+			{
+				pos = line.find(",");
+				std::string name = line.substr(0, pos);
+				line = line.substr(pos + 1);
+				_entity->name = name;
+			}
 			parsePolygon(line, dynamic_cast<EntityPolygon*>(_entity));
 		break;
 		case ENTITY_SHAPE_CIRCLE:
@@ -68,8 +75,7 @@ void EntityLoader::parseIdentifier( std::string identifier, Entity** _entity)
 			}
 
 			(*_entity)->tile = &Tile::defaults[x];
-
-		
+					
 			break;
 		}
 	}
@@ -90,7 +96,12 @@ void EntityLoader::parsePolygon( std::string line, EntityPolygon* _entity )
 		std::string longitude = line.substr(0, pos);
 		line = line.substr(pos + 1);
 
-		_entity->_pointList.push_back(SVector2Df(latitude, longitude));
+		_entity->_pointListGeo.push_back(SVector2Df(latitude, longitude));
+
+		if ( pos == std::string::npos )
+		{
+			break;
+		}
 	}
 }
 
@@ -110,7 +121,7 @@ void EntityLoader::parseCircle(std::string line, EntityCircle* _entity)
 	std::string radius = line.substr(0, pos);
 	line = line.substr(pos + 1);
 	
-	_entity->circlePosition = SVector2Df(latitude, longitude);
-	_entity->circleRadius = std::stof(radius);
+	_entity->circlePositionGeo = SVector2Df(latitude, longitude);
+	_entity->circleRadiusMeters = std::stof(radius);
 
 }

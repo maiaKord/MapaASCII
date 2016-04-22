@@ -25,12 +25,15 @@ void EntityRenderer::init(std::vector<Entity*> listEntity, Map<char>* map)
 			SVector2Df pMin = ep->boundingSquare->_pointMin;
 			SVector2Df pMax = ep->boundingSquare->_pointMax;
 
-			for ( int z = pMin.z; z < pMin.z; z++)
+			for ( int z = pMin.z; z < pMax.z; z++)
 			{
 				for ( int x = pMin.x; x < pMax.x; x++)
 				{
 					if ( Utils::isPointInPath(SVector2Df(x,z) , ep->_pointListMeters) )
-						map->setTile( x, z, ep->tile->character );
+					{
+						// map->setTile( x, z, ep->tile->character );
+						// need to enlarge the map
+					}
 				}
 			}
 		}

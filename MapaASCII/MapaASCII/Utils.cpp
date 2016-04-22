@@ -80,26 +80,24 @@ BoundingSquare Utils::calculateBoundingSquare(std::vector<SVector2Df> listPoints
 	return bs;
 }
 
-//Rasterizing a 2D polygon using even-odd rule (https://en.wikipedia.org/wiki/Even%E2%80%93odd_rule)
+//Rasterizing a 2D polygon
 bool Utils::isPointInPath( SVector2Df point, std::vector<SVector2Df> listPoints)
 {
-	int num = listPoints.size();
-	int i = 0;
-	int j = num - 1;
-	bool c = false;
+	int polyCorners = listPoints.size();
+	int j = polyCorners -1;
+	bool oddNodes = false;
 
-	while( i < num )
+	for (int i = 0; i < polyCorners; i++) 
 	{
-		if ( ( (listPoints[i].z > point.z) != (listPoints[j].z > point.z) )  
-				&& (point.x < ( listPoints[j].x - listPoints[i].x ) * ( point.z - listPoints[i].z )  
-				/ (listPoints[j].z - listPoints[i].z) + listPoints[i].x) )
-			c = !c;
-			
+		if ( listPoints[i].z < point.z && listPoints[j].z >= point.z || listPoints[j].z < point.z && listPoints[i].z >= point.z ) 
+		{
+			if (listPoints[i].x + (point.z - listPoints[i].z) / (listPoints[j].z - listPoints[i].z ) * (listPoints[j].x - listPoints[i].x ) < point.x ) 
+				oddNodes = !oddNodes;
+		}
 		j = i;
-		i++;
 	}
 
-	return c;
+	return oddNodes;
 }
 
 std::string Utils::readTextFile(const char *fileName)

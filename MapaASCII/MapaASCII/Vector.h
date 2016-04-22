@@ -32,11 +32,30 @@ struct SVector2Df
 		z = std::stof(vZ);
 	}
 
+	float sqlength()
+	{
+		float sqlength = x*x + z*z;
+
+		return sqlength;
+	}
+
 	float lenght()
 	{
-		float distance = sqrt((float)x*x + z*z);
+		float l = 0;
+		float sql = sqlength();
+		
+		if (sql > 0 )
+			l = sqrt(sql);
 
-		return distance;
+		return l;
+	}
+
+	float distance( SVector2Df p)
+	{
+		SVector2Df vd = p - *this;
+		float d = vd.lenght();
+
+		return d;
 	}
 	
 	SVector2Df operator + (SVector2Df v )

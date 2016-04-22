@@ -44,7 +44,18 @@ void EntityRenderer::init(std::vector<Entity*> listEntity, Map<char>* map)
 			SVector2Df pMin = ec->boundingSquare->_pointMin;
 			SVector2Df pMax = ec->boundingSquare->_pointMax;
 
-			//WIP
+			for (int z = pMin.z; z < pMax.z; z++)
+			{
+				for (int x = pMin.x; x < pMax.x; x++)
+				{
+					if ( SVector2Df(x,z).distance(ec->circlePositionMeters ) <= ec->circleRadiusMeters )
+					{
+						// map->setTile( x, z, ec->tile->character );
+						// need to enlarge the map
+					}
+				}
+			}
+			
 		}
 	
 	}

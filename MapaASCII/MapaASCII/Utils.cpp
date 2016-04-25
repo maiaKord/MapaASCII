@@ -55,14 +55,9 @@ void Utils::convertGeoToMeters(const std::vector<SVector2Df>& listPointsGeo, std
 BoundingSquare Utils::calculateBoundingSquare(SVector2Df point, float radio)
 {
 	BoundingSquare bs;
-/*
-	bs._pointMax = point + SVector2Df(radio,radio);
+
+	bs._pointMax = point + SVector2Df(radio, radio);
 	bs._pointMin = point - SVector2Df(radio, radio);
-*/
-	bs._pointMin.x = point.x - radio;
-	bs._pointMin.z = point.z - radio;
-	bs._pointMax.x = point.x + radio;
-	bs._pointMax.z = point.z + radio;
 
 	return bs;
 }

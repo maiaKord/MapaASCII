@@ -89,9 +89,6 @@ struct Application
 		SVector2Df cameraF = Utils::convertGeoToMeters(SVector2Df(_settingsVP.getLeftLongitude(), _settingsVP.getSuperiorLatitude()));
 		_camera.x = cameraF.x;
 		_camera.z = cameraF.z;
-
-		_camera.x = -3853653; //cameraF.x;
-		_camera.z = -6497440; //cameraF.z;
 		
 		_eRender->init(_entityList, *_mapTile);
 	}

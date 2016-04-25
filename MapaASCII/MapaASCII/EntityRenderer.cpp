@@ -1,7 +1,7 @@
 #include "EntityRenderer.h"
 #include "Utils.h"
 
-void EntityRenderer::init(std::vector<Entity*> listEntity, Map<char>* map)
+void EntityRenderer::init( std::vector<Entity*>& listEntity, Map<char>& map)
 {
 	EntityPolygon* ep = nullptr;
 	EntityCircle* ec = nullptr;
@@ -31,8 +31,7 @@ void EntityRenderer::init(std::vector<Entity*> listEntity, Map<char>* map)
 				{
 					if ( Utils::isPointInPath(SVector2Df(x,z) , ep->_pointListMeters) )
 					{
-						// map->setTile( x, z, ep->tile->character );
-						// need to enlarge the map
+						map.setTile( x, z, ep->tile->character );
 					}
 				}
 			}
@@ -50,8 +49,7 @@ void EntityRenderer::init(std::vector<Entity*> listEntity, Map<char>* map)
 				{
 					if ( SVector2Df(x,z).distance(ec->circlePositionMeters ) <= ec->circleRadiusMeters )
 					{
-						// map->setTile( x, z, ec->tile->character );
-						// need to enlarge the map
+						map.setTile(x, z, ep->tile->character);
 					}
 				}
 			}

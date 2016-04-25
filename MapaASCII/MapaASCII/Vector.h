@@ -3,13 +3,28 @@
 
 struct SVector2D
 {
-	int x = 0;
-	int z = 0;
+	int x;
+	union
+	{
+		int z;
+		int y;
+	};
+	
+	SVector2D()
+	{
+		x = 0;
+		z = 0;
+	}
 
 	SVector2D(int vX, int vZ)
 	{
 		x = vX;
 		z = vZ;
+	}
+
+	bool operator == (SVector2D v )
+	{
+		return (x == v.x && z == v.z);
 	}
 };
 

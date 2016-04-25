@@ -84,7 +84,7 @@ struct Application
 			}
 		}
 
-		_eRender->init(_entityList, _mapTile);
+		_eRender->init(_entityList, *_mapTile);
 	}
 
 	void update()

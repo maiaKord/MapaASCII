@@ -160,6 +160,7 @@
     <ClInclude Include="EntityRenderer.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="EntityLoader.h" />
+    <ClInclude Include="Region.h" />
     <ClInclude Include="Screen.h" />
     <ClInclude Include="SettingsViewPort.h" />
     <ClInclude Include="Tile.h" />

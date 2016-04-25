@@ -131,6 +131,7 @@ void EntityLoader::parseCircle(std::string line, EntityCircle* _entity)
 	line = line.substr(pos + 1);
 	
 	_entity->circlePositionGeo = SVector2Df(latitude, longitude);
-	_entity->circleRadiusMeters = std::stof(radius);
-
+	
+	// kilometers to meters
+	_entity->circleRadiusMeters = std::stof(radius) * 1000;
 }

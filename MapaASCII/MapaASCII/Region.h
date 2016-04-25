@@ -33,8 +33,8 @@ struct TileCoords
 
 		if ( x < 0 )
 		{
-			tile.x = LAYER_WIDTH - tile.x;
-			layer.x  = REGION_WIDTH - layer.x;
+			tile.x = (LAYER_WIDTH-1) + tile.x;
+			layer.x  = (REGION_WIDTH-1) + layer.x;
 		}
 	}
 
@@ -47,8 +47,8 @@ struct TileCoords
 		
 		if ( z < 0 )
 		{
-			tile.z = LAYER_HEIGHT - tile.z;
-			layer.z = REGION_HEIGHT - layer.z;
+			tile.z = (LAYER_HEIGHT-1) + tile.z;
+			layer.z = (REGION_HEIGHT-1) + layer.z;
 		}
 	}
 };

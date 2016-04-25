@@ -3,11 +3,11 @@
 
 void EntityRenderer::init( std::vector<Entity*>& listEntity, Map<char>& map)
 {
-	EntityPolygon* ep = nullptr;
-	EntityCircle* ec = nullptr;
-
 	for ( Entity* e : listEntity )
 	{
+		EntityPolygon* ep = nullptr;
+		EntityCircle* ec = nullptr;
+
 		switch (e->shape)
 		{
 			case ENTITY_SHAPE_POLYGON:
@@ -21,9 +21,9 @@ void EntityRenderer::init( std::vector<Entity*>& listEntity, Map<char>& map)
 		}
 		if ( ep )
 		{
-			ep->boundingSquare = &Utils::calculateBoundingSquare(ep->_pointListMeters);
-			SVector2Df pMin = ep->boundingSquare->_pointMin;
-			SVector2Df pMax = ep->boundingSquare->_pointMax;
+			ep->boundingSquare = Utils::calculateBoundingSquare(ep->_pointListMeters);
+			SVector2Df pMin = ep->boundingSquare._pointMin;
+			SVector2Df pMax = ep->boundingSquare._pointMax;
 
 			for ( int z = pMin.z; z < pMax.z; z++)
 			{
@@ -39,9 +39,9 @@ void EntityRenderer::init( std::vector<Entity*>& listEntity, Map<char>& map)
 
 		if (ec)
 		{
-			ec->boundingSquare = &Utils::calculateBoundingSquare(ec->circlePositionMeters, ec->circleRadiusMeters);
-			SVector2Df pMin = ec->boundingSquare->_pointMin;
-			SVector2Df pMax = ec->boundingSquare->_pointMax;
+			ec->boundingSquare = Utils::calculateBoundingSquare(ec->circlePositionMeters, ec->circleRadiusMeters);
+			SVector2Df pMin = ec->boundingSquare._pointMin;
+			SVector2Df pMax = ec->boundingSquare._pointMax;
 
 			for (int z = pMin.z; z < pMax.z; z++)
 			{
@@ -49,7 +49,7 @@ void EntityRenderer::init( std::vector<Entity*>& listEntity, Map<char>& map)
 				{
 					if ( SVector2Df(x,z).distance(ec->circlePositionMeters ) <= ec->circleRadiusMeters )
 					{
-						map.setTile(x, z, ep->tile->character);
+						map.setTile(x, z, ec->tile->character);
 					}
 				}
 			}

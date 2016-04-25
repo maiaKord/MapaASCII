@@ -150,7 +150,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="EntityLoader.cpp" />
     <ClCompile Include="Screen.cpp" />
-    <ClCompile Include="Settings.cpp" />
+    <ClCompile Include="SettingsViewPort.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>

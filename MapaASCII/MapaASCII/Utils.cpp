@@ -31,9 +31,15 @@ SVector2Df Utils::convertGeoToMeters(SVector2Df p1)
 	p2 = p1;
 	p2.x = 0;
 	result.z = measure(SVector2Df(0, 0), p2 );
+	
+	if ( p1.z < 0 )
+		result.z *= -1;
 
 	//latitud
 	result.x = measure(p2, p1);
+
+	if (p1.x < 0)
+		result.x *= -1;
 
 	return result;
 }
@@ -49,9 +55,14 @@ void Utils::convertGeoToMeters(const std::vector<SVector2Df>& listPointsGeo, std
 BoundingSquare Utils::calculateBoundingSquare(SVector2Df point, float radio)
 {
 	BoundingSquare bs;
-	
+/*
 	bs._pointMax = point + SVector2Df(radio,radio);
-	bs._pointMin = point - SVector2Df(radio, radio);;
+	bs._pointMin = point - SVector2Df(radio, radio);
+*/
+	bs._pointMin.x = point.x - radio;
+	bs._pointMin.z = point.z - radio;
+	bs._pointMax.x = point.x + radio;
+	bs._pointMax.z = point.z + radio;
 
 	return bs;
 }

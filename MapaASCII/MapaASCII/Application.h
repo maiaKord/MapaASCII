@@ -27,7 +27,7 @@ struct Application
 	Cursor _cursor;
 	SettingsViewPort _settingsVP;
 	Screen* _screen = nullptr;
-	SVector2D camera = { 0,0 };
+	SVector2D _camera = { 0,0 };
 	
 	Map<char>* _mapTile = nullptr;
 	std::vector<Entity*> _entityList;
@@ -87,8 +87,11 @@ struct Application
 		}
 
 		SVector2Df cameraF = Utils::convertGeoToMeters(SVector2Df(_settingsVP.getLeftLongitude(), _settingsVP.getSuperiorLatitude()));
-		camera.x = cameraF.x;
-		camera.z = cameraF.z;
+		_camera.x = cameraF.x;
+		_camera.z = cameraF.z;
+
+		_camera.x = -3853653; //cameraF.x;
+		_camera.z = -6497440; //cameraF.z;
 		
 		_eRender->init(_entityList, *_mapTile);
 	}
@@ -98,7 +101,7 @@ struct Application
 		int _screenWidth = _screen->getBackBufferWidth();
 		int _screenHeight = _screen->getBackBufferHeight();
 
-		_mapTile->print(_screen->getPixels(), _screenWidth, _screenHeight * _screenWidth, camera);
+		_mapTile->print(_screen->getPixels(), _screenWidth, _screenHeight * _screenWidth, _camera);
 
 		// move the cursor in base of the keys up, down, right and left
 		if (GetAsyncKeyState(VK_UP))
@@ -112,6 +115,19 @@ struct Application
 
 		if (GetAsyncKeyState(VK_LEFT))
 			_cursor.x -= 1;
+
+		// move the camera
+		if( GetAsyncKeyState('W') )
+			_camera.y -= 1;
+
+		if (GetAsyncKeyState('S'))
+			_camera.y += 1;
+
+		if (GetAsyncKeyState('D'))
+			_camera.x += 1;
+
+		if (GetAsyncKeyState('A'))
+			_camera.x -= 1;
 
 		// check the limit and fix the position
 		_cursor.fixPosition(_screenWidth, _screenHeight);

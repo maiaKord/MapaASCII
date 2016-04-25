@@ -50,3 +50,5 @@ Debug
 *.opendb
 v14
 *.sdf
+/MapaASCII/MapaASCII/Release
+/MapaASCII/Release

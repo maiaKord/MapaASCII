@@ -1,6 +1,8 @@
 #pragma once
 #include <Windows.h>
 
+// This class manage the drawn space
+
 class Screen
 {
 	int _backBufferWidth = 0;
@@ -12,7 +14,7 @@ public:
 	Screen(int screenWidth, int screenHeight);
 	~Screen();
 
-	void init( );
+	void init();
 	void print();
 
 	// encapsulamiento

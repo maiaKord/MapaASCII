@@ -25,11 +25,13 @@ struct Cursor
 struct Application
 {
 	Cursor _cursor;
-	SVector2D _screenPosition = { 0,0 };
 	SettingsViewPort _settingsVP;
 	Screen* _screen = nullptr;
+	SVector2D camera = { 0,0 };
+	
 	Map<char>* _mapTile = nullptr;
 	std::vector<Entity*> _entityList;
+	
 	EntityRenderer* _eRender = nullptr;
 	
 	Application() { }
@@ -84,6 +86,10 @@ struct Application
 			}
 		}
 
+		SVector2Df cameraF = Utils::convertGeoToMeters(SVector2Df(_settingsVP.getLeftLongitude(), _settingsVP.getSuperiorLatitude()));
+		camera.x = cameraF.x;
+		camera.z = cameraF.z;
+		
 		_eRender->init(_entityList, *_mapTile);
 	}
 
@@ -92,7 +98,7 @@ struct Application
 		int _screenWidth = _screen->getBackBufferWidth();
 		int _screenHeight = _screen->getBackBufferHeight();
 
-		_mapTile->print(_screen->getPixels(), _screenWidth, _screenHeight * _screenWidth, _screenPosition);
+		_mapTile->print(_screen->getPixels(), _screenWidth, _screenHeight * _screenWidth, camera);
 
 		// move the cursor in base of the keys up, down, right and left
 		if (GetAsyncKeyState(VK_UP))

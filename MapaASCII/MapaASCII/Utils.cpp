@@ -5,19 +5,19 @@
 # define M_PI 3.14159265358979323846  /* pi */
 
 // generally used geo measurement function
-float Utils::measure(SVector2Df point1, SVector2Df point2)
+double Utils::measure(SVector2Df point1, SVector2Df point2)
 {
 	// Radius of earth in KM
-	float R = 6378.137f;
+	double R = 6378.137f;
 
-	float dLat = (point1.x - point2.x) * M_PI / 180;
-	float dLon = (point1.z - point2.z) * M_PI / 180;
-	float a = sin(dLat / 2) * sin(dLat / 2) + cos(point1.x * M_PI / 180) * cos(point2.x * M_PI / 180) * sin(dLon / 2) * sin(dLon / 2);
-	float c = 2 * atan2(sqrt(a), sqrt(1 - a));
-	float d = R * c;
+	double dLat = (point1.x - point2.x) * M_PI / 180;
+	double dLon = (point1.z - point2.z) * M_PI / 180;
+	double a = sin(dLat / 2) * sin(dLat / 2) + cos(point1.x * M_PI / 180) * cos(point2.x * M_PI / 180) * sin(dLon / 2) * sin(dLon / 2);
+	double c = 2 * atan2(sqrt(a), sqrt(1 - a));
+	double d = R * c;
 
 	//convert to meters
-	float meters = d * 1000;
+	double meters = d * 1000;
 
 	return meters;
 }
@@ -30,13 +30,13 @@ SVector2Df Utils::convertGeoToMeters(SVector2Df p1)
 	// longitud
 	p2 = p1;
 	p2.x = 0;
-	result.z = measure(SVector2Df(0, 0), p2 );
+	result.z = (float)measure(SVector2Df(0, 0), p2 );
 	
 	if ( p1.z < 0 )
 		result.z *= -1;
 
 	//latitud
-	result.x = measure(p2, p1);
+	result.x = (float)measure(p2, p1);
 
 	if (p1.x < 0)
 		result.x *= -1;

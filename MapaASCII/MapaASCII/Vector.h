@@ -41,6 +41,12 @@ struct SVector2Df
 		z = vZ;
 	}
 
+	SVector2Df(int vX, int vZ)
+	{
+		x = (float)vX;
+		z = (float)vZ;
+	}
+
 	SVector2Df(std::string vX, std::string vZ)
 	{
 		x = std::stof(vX);

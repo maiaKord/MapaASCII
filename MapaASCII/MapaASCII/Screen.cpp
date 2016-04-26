@@ -57,7 +57,7 @@ void Screen::print()
 {
 	CONSOLE_SCREEN_BUFFER_INFO csbiInfo = {};
 	GetConsoleScreenBufferInfo(_hConsoleOut, &csbiInfo);
-	COORD Coords = { 0, csbiInfo.dwSize.Y - _backBufferHeight };
+	COORD Coords = { 0, csbiInfo.dwSize.Y - (SHORT)_backBufferHeight };
 	char* myLine = 0;
 	DWORD dummy = 0;
 

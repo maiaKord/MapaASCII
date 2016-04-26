@@ -60,8 +60,8 @@ void Application::init()
 	}
 
 	SVector2Df cameraF = Utils::convertGeoToMeters(SVector2Df(_settingsVP.getLeftLongitude(), _settingsVP.getSuperiorLatitude()));
-	_camera.x = cameraF.x;
-	_camera.z = cameraF.z;
+	_camera.x = (int)cameraF.x;
+	_camera.z = (int)cameraF.z;
 
 	_eRender = new EntityRenderer();
 	_eRender->init(_entityList, *_mapTile);

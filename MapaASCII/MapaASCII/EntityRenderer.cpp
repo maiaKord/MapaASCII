@@ -8,6 +8,9 @@ void EntityRenderer::init( std::vector<Entity*>& listEntity, Map<char>& map)
 		EntityPolygon* ep = nullptr;
 		EntityCircle* ec = nullptr;
 
+		if ( !e ) 
+			continue;
+
 		switch (e->shape)
 		{
 			case ENTITY_SHAPE_POLYGON:
@@ -25,9 +28,9 @@ void EntityRenderer::init( std::vector<Entity*>& listEntity, Map<char>& map)
 			SVector2Df pMin = ep->boundingSquare._pointMin;
 			SVector2Df pMax = ep->boundingSquare._pointMax;
 
-			for ( int z = pMin.z; z < pMax.z; z++)
+			for ( int z = (int)pMin.z; z < pMax.z; z++)
 			{
-				for ( int x = pMin.x; x < pMax.x; x++)
+				for ( int x = (int)pMin.x; x < pMax.x; x++)
 				{
 					if ( Utils::isPointInPath(SVector2Df(x,z) , ep->_pointListMeters) )
 					{
@@ -43,9 +46,9 @@ void EntityRenderer::init( std::vector<Entity*>& listEntity, Map<char>& map)
 			SVector2Df pMin = ec->boundingSquare._pointMin;
 			SVector2Df pMax = ec->boundingSquare._pointMax;
 
-			for (int z = pMin.z; z < pMax.z; z++)
+			for (int z = (int)pMin.z; z < pMax.z; z++)
 			{
-				for (int x = pMin.x; x < pMax.x; x++)
+				for (int x = (int)pMin.x; x < pMax.x; x++)
 				{
 					if ( SVector2Df(x,z).distance(ec->circlePositionMeters ) <= ec->circleRadiusMeters )
 					{

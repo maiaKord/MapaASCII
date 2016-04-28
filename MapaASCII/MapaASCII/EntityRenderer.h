@@ -6,5 +6,5 @@
 
 struct EntityRenderer 
 {
-	void init( std::vector<Entity*>& listEntity, Map<char>& map);
+	void render( std::vector<Entity*>& listEntity, Map<char>& map);
 };

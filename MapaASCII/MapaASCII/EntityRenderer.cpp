@@ -1,7 +1,7 @@
 #include "EntityRenderer.h"
 #include "Utils.h"
 
-void EntityRenderer::init( std::vector<Entity*>& listEntity, Map<char>& map)
+void EntityRenderer::render( std::vector<Entity*>& listEntity, Map<char>& map)
 {
 	for ( Entity* e : listEntity )
 	{

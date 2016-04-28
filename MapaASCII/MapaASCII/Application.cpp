@@ -1,5 +1,8 @@
 #include "Application.h"
 
+#define UP_LINES 4
+#define ALL_LINES 4 + UP_LINES
+
 Application::Application() 
 {
 	_cursor = {1,1};
@@ -64,7 +67,7 @@ void Application::init()
 	_camera.z = (int)cameraF.z;
 
 	_eRender = new EntityRenderer();
-	_eRender->init(_entityList, *_mapTile);
+	_eRender->render(_entityList, *_mapTile);
 }
 
 void Application::update()
@@ -72,7 +75,8 @@ void Application::update()
 	int _screenWidth = _screen->getBackBufferWidth();
 	int _screenHeight = _screen->getBackBufferHeight();
 
-	_mapTile->print(_screen->getPixels(), _screenWidth, _screenHeight * _screenWidth, _camera);
+	_screen->clear();
+	_mapTile->print( (_screen->getPixels() + (_screenWidth * UP_LINES)), _screenWidth, (_screenHeight - ALL_LINES) * _screenWidth, _camera);
 
 	// move the cursor in base of the keys up, down, right and left
 	if (GetAsyncKeyState(VK_UP))

@@ -64,6 +64,11 @@ void Screen::print()
 	WriteConsoleOutputCharacterA(_hConsoleOut, _pixels, _backBufferWidth*_backBufferHeight, Coords, &dummy);
 }
 
+void Screen::clear()
+{
+	memset(_pixels, 0, _backBufferHeight * _backBufferWidth);
+}
+
 //**************************
 // encapsulamiento
 

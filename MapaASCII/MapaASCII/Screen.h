@@ -16,6 +16,7 @@ public:
 
 	void init();
 	void print();
+	void clear();
 
 	// encapsulamiento
 

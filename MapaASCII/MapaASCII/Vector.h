@@ -31,7 +31,11 @@ struct SVector2D
 struct SVector2Df
 {
 	float x = 0;
-	float z = 0;
+	union
+	{
+		float z;
+		float y;
+	};
 
 	SVector2Df(){}
 

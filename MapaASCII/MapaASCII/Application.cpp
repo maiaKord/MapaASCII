@@ -76,6 +76,7 @@ void Application::update()
 	int _screenHeight = _screen->getBackBufferHeight();
 
 	_screen->clear();
+	_screen->printText(1, 1, "Move the camera using 'W' 'A' 'S' 'D' keys ");
 	_mapTile->print( (_screen->getPixels() + (_screenWidth * UP_LINES)), _screenWidth, (_screenHeight - ALL_LINES) * _screenWidth, _camera);
 
 	// move the cursor in base of the keys up, down, right and left

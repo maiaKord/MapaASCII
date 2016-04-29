@@ -15,7 +15,10 @@ public:
 	~Screen();
 
 	void init();
+	
 	void print();
+	void printText(int x, int y, const char* text);
+
 	void clear();
 
 	// encapsulamiento

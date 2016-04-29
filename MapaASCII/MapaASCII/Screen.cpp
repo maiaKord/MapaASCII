@@ -64,6 +64,11 @@ void Screen::print()
 	WriteConsoleOutputCharacterA(_hConsoleOut, _pixels, _backBufferWidth*_backBufferHeight, Coords, &dummy);
 }
 
+void Screen::printText(int x, int z, const char* text )
+{
+	memcpy(&_pixels[z * _backBufferWidth + x], text, strlen(text));
+}
+
 void Screen::clear()
 {
 	memset(_pixels, 0, _backBufferHeight * _backBufferWidth);

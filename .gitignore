@@ -52,3 +52,6 @@ v14
 *.sdf
 /MapaASCII/MapaASCII/Release
 /MapaASCII/Release
+/Win32.Debug
+/obj/Win32.Debug/MAScreen
+/obj/Win32.Debug/MapaASCII

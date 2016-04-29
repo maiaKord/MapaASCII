@@ -33,7 +33,7 @@ void EntityLoader::parseEntity(std::string line, Entity** entity)
 		case ENTITY_SHAPE_POLYGON:
 		case ENTITY_SHAPE_SQUARE:
 		case ENTITY_SHAPE_TRIANGLE:
-			if ( _entity->tile->identifier.compare("edificio-publico") == 0 ) //esta entrando por lo que no son !!
+			if ( _entity->tile->identifier.compare("edificio-publico") == 0 )
 			{	
 				pos = line.find(",");
 				std::string name = line.substr(0, pos);

@@ -1,13 +1,64 @@
 #include "EntityRenderer.h"
 #include "Utils.h"
 
-void EntityRenderer::init( std::vector<Entity*>& listEntity, Map<char>& map)
+void EntityRenderer::renderPolygon(std::vector<SVector2Df>& listPoints, Map<char>& map, char character)
 {
-	EntityPolygon* ep = nullptr;
-	EntityCircle* ec = nullptr;
+	BoundingSquare boundingSquare = Utils::calculateBoundingSquare(listPoints);
+	SVector2Df pMin = boundingSquare._pointMin;
+	SVector2Df pMax = boundingSquare._pointMax;
 
+	for (int z = (int)pMin.z; z < pMax.z; z++)
+	{
+		for (int x = (int)pMin.x; x < pMax.x; x++)
+		{
+			if (Utils::isPointInPath(SVector2Df(x, z), listPoints))
+			{
+				map.setTile(x, z, character);
+			}
+		}
+	}
+}
+
+void EntityRenderer::renderCircle(SVector2Df point, float ratio, Map<char>& map, char character)
+{
+	BoundingSquare boundingSquare = Utils::calculateBoundingSquare(point, ratio);
+	SVector2Df pMin = boundingSquare._pointMin;
+	SVector2Df pMax = boundingSquare._pointMax;
+
+	for (int z = (int)pMin.z; z < pMax.z; z++)
+	{
+		for (int x = (int)pMin.x; x < pMax.x; x++)
+		{
+			if (SVector2Df(x, z).distance(point) <= ratio)
+			{
+				map.setTile(x, z, character);
+			}
+		}
+	}
+}
+void EntityRenderer::renderPoints(std::vector<SVector2Df>& listPoints, Map<char>& map, char character)
+{
+	for (SVector2Df p : listPoints)
+	{
+		map.setTile((int)p.x, (int)p.z, character);
+	}
+}
+
+void EntityRenderer::renderLines(std::vector<SVector2Df>& listPoints, Map<char>& map, char character)
+{
+	// WIP
+}
+
+void EntityRenderer::render( std::vector<Entity*>& listEntity, Map<char>& map)
+{
 	for ( Entity* e : listEntity )
 	{
+		EntityPolygon* ep = nullptr;
+		EntityCircle* ec = nullptr;
+
+		if ( !e ) 
+			continue;
+
 		switch (e->shape)
 		{
 			case ENTITY_SHAPE_POLYGON:
@@ -19,42 +70,13 @@ void EntityRenderer::init( std::vector<Entity*>& listEntity, Map<char>& map)
 				ec = dynamic_cast<EntityCircle*>(e);
 				break;
 		}
-		if ( ep )
-		{
-			ep->boundingSquare = &Utils::calculateBoundingSquare(ep->_pointListMeters);
-			SVector2Df pMin = ep->boundingSquare->_pointMin;
-			SVector2Df pMax = ep->boundingSquare->_pointMax;
 
-			for ( int z = pMin.z; z < pMax.z; z++)
-			{
-				for ( int x = pMin.x; x < pMax.x; x++)
-				{
-					if ( Utils::isPointInPath(SVector2Df(x,z) , ep->_pointListMeters) )
-					{
-						map.setTile( x, z, ep->tile->character );
-					}
-				}
-			}
-		}
+
+		if ( ep )
+			renderPolygon(ep->_pointListMeters, map, ep->tile->character);
 
 		if (ec)
-		{
-			ec->boundingSquare = &Utils::calculateBoundingSquare(ec->circlePositionMeters, ec->circleRadiusMeters);
-			SVector2Df pMin = ec->boundingSquare->_pointMin;
-			SVector2Df pMax = ec->boundingSquare->_pointMax;
-
-			for (int z = pMin.z; z < pMax.z; z++)
-			{
-				for (int x = pMin.x; x < pMax.x; x++)
-				{
-					if ( SVector2Df(x,z).distance(ec->circlePositionMeters ) <= ec->circleRadiusMeters )
-					{
-						map.setTile(x, z, ep->tile->character);
-					}
-				}
-			}
-			
-		}
+			renderCircle(ec->circlePositionMeters, ec->circleRadiusMeters, map, ec->tile->character );
 	
 	}
 }

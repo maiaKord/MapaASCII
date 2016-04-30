@@ -47,7 +47,7 @@ public:
 			for (int x = 0; x < maxWidth; x++)
 			{
 				// convert 1D from 2D
-				pixels[z * maxWidth + x] = getTile( x - position.x , z - position.z );
+				pixels[z * maxWidth + x] = getTile( x + position.x , z + position.z );
 			}
 		}
 
@@ -66,7 +66,7 @@ public:
 		{
 			if (r->position == tc.region)
 			{
-				if ( r->layers[tc.layer.x][tc.layer.z] )
+				if ( r->layers[tc.layer.z][tc.layer.x] )
 				{
 					tile = r->layers[tc.layer.z][tc.layer.x]->tiles[tc.tile.z][tc.tile.x];
 				}

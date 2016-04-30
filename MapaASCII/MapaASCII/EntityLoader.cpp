@@ -33,7 +33,7 @@ void EntityLoader::parseEntity(std::string line, Entity** entity)
 		case ENTITY_SHAPE_POLYGON:
 		case ENTITY_SHAPE_SQUARE:
 		case ENTITY_SHAPE_TRIANGLE:
-			if ( _entity->tile->identifier.compare("edificio-publico") == 0 ) //esta entrando por lo que no son !!
+			if ( _entity->tile->identifier.compare("edificio-publico") == 0 )
 			{	
 				pos = line.find(",");
 				std::string name = line.substr(0, pos);
@@ -131,6 +131,7 @@ void EntityLoader::parseCircle(std::string line, EntityCircle* _entity)
 	line = line.substr(pos + 1);
 	
 	_entity->circlePositionGeo = SVector2Df(latitude, longitude);
-	_entity->circleRadiusMeters = std::stof(radius);
-
+	
+	// kilometers to meters
+	_entity->circleRadiusMeters = std::stof(radius) * 1000;
 }

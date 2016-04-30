@@ -9,7 +9,7 @@ namespace Utils
 {
 	std::string readTextFile(const char *fileName);
 
-	float measure(SVector2Df point1, SVector2Df point2);
+	double measure(SVector2Df point1, SVector2Df point2);
 	SVector2Df convertGeoToMeters( SVector2Df p1 );
 	void convertGeoToMeters(const std::vector<SVector2Df>& listPointsGeo, std::vector<SVector2Df>& listPointsMeters);
 	

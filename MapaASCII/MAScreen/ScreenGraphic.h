@@ -2,7 +2,6 @@
 #include <windows.h>
 #include "Screen.h"
 
-static const wchar_t sClassName[] = L"MapaASCII";
 static HINSTANCE zhInstance = NULL;
 
 class ScreenGraphic : public Screen

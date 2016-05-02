@@ -14,6 +14,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	Application* _app = new Application();
 
 	_app->init();
+	//_app->init(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
 
 	while (_running)
 	{

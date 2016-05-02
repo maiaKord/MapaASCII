@@ -153,12 +153,14 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Screen.cpp" />
     <ClCompile Include="ScreenConsole.cpp" />
     <ClCompile Include="ScreenGraphic.cpp" />
     <ClCompile Include="SettingsViewPort.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Screen.h" />
     <ClInclude Include="ScreenConsole.h" />
     <ClInclude Include="ScreenGraphic.h" />

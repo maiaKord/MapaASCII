@@ -1,13 +1,16 @@
 #pragma once
 #include <Windows.h>
 #include "SettingsViewPort.h"
+#include "Camera.h"
 
 // This class manage the drawn space
+
+static const wchar_t appName[] = L"MapaASCII";
 
 class Screen
 {
 	SettingsViewPort _settingsVP;
-	SVector2D _camera = { 0,0 };
+	Camera _camera;
 
 protected:
 	int _backBufferWidth = 0;
@@ -26,6 +29,6 @@ public:
 	// encapsulamiento
 	int getBackBufferWidth();
 	int getBackBufferHeight();
-	SVector2D& getCamera();
-	virtual char* getPixels();
+	Camera& getCamera();
+	char* getPixels();
 };

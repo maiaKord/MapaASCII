@@ -4,6 +4,7 @@
 
 #define UP_LINES 4
 #define ALL_LINES (4 + UP_LINES)
+#define VELOCITY_MOVE 4
 
 Application::Application() 
 {
@@ -32,6 +33,20 @@ void Application::init()
 	_screenConsole->init();
 	_screen = _screenConsole;
 
+	load();
+}
+
+void Application::init(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+{
+	ScreenGraphic* _screenGraphic = new ScreenGraphic();
+	_screenGraphic->init(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
+	_screen = _screenGraphic;
+
+	load();
+}
+
+void Application::load()
+{
 	_mapTile = new Map<char>;	// Tile represent the terrain material
 	_mapTile->init(1920, 1980);
 
@@ -88,18 +103,31 @@ void Application::update()
 	if (GetAsyncKeyState(VK_LEFT))
 		_cursor.x -= 1;
 
+	// scale the camera
+	if (GetAsyncKeyState(VK_ADD))
+	{ 
+		_screen->getCamera().scale.y += 1;
+		_screen->getCamera().scale.x += 1;
+	}
+
+	if (GetAsyncKeyState(VK_SUBTRACT))
+	{ 
+		_screen->getCamera().scale.y -= 1;
+		_screen->getCamera().scale.x -= 1;
+	}
+
 	// move the camera
 	if (GetAsyncKeyState('W'))
-		_screen->getCamera().y -= 1;
+		_screen->getCamera().position.y -= VELOCITY_MOVE;
 
 	if (GetAsyncKeyState('S'))
-		_screen->getCamera().y += 1;
+		_screen->getCamera().position.y += VELOCITY_MOVE;
 
 	if (GetAsyncKeyState('D'))
-		_screen->getCamera().x += 1;
+		_screen->getCamera().position.x += VELOCITY_MOVE;
 
 	if (GetAsyncKeyState('A'))
-		_screen->getCamera().x -= 1;
+		_screen->getCamera().position.x -= VELOCITY_MOVE;
 
 	// check the limit and fix the position
 	_cursor.fixPosition(_screenWidth, _screenHeight);

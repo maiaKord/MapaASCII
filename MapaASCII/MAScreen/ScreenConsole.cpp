@@ -2,6 +2,13 @@
 
 ScreenConsole::ScreenConsole()
 {
+	AllocConsole();
+	AttachConsole(GetCurrentProcessId());
+
+	FILE* fp = stdout;
+	freopen_s(&fp, "CON", "w", stdout);
+	SetConsoleTitle(appName);
+
 	_hConsoleOut = GetStdHandle(STD_OUTPUT_HANDLE);
 }
 

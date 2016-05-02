@@ -44,8 +44,10 @@ struct Application
 	Application();
 	~Application();
 
-	void init ();
+	void init();
+	void init(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow);
 
+	void load();
 	void update();
 
 };

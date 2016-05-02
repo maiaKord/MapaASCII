@@ -3,6 +3,7 @@
 #include "Tile.h"
 #include "Vector.h"
 #include "Region.h"
+#include "Camera.h"
 
 // define the layers counts on memory 16*16
 #define MAP_WIDTH 16
@@ -37,7 +38,7 @@ public:
 		
 	}
 
-	int print(char* pixels, int maxWidth, int maxPixels, SVector2D position)
+	int print(char* pixels, int maxWidth, int maxPixels, Camera camera)
 	{
 		int height = maxPixels / maxWidth;
 		 
@@ -47,7 +48,9 @@ public:
 			for (int x = 0; x < maxWidth; x++)
 			{
 				// convert 1D from 2D
-				pixels[z * maxWidth + x] = getTile( x + position.x , z + position.z );
+				int vX = (x * camera.scale.x) + camera.position.x;
+				int vZ = (z * camera.scale.y) + camera.position.z;
+				pixels[z * maxWidth + x] = getTile( vX , vZ );
 			}
 		}
 

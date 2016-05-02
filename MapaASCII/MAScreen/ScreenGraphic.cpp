@@ -35,7 +35,7 @@ int ScreenGraphic::init(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCm
 	WndClass.hCursor = LoadCursor(NULL, IDC_ARROW);
 	WndClass.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
 	WndClass.lpszMenuName = NULL;
-	WndClass.lpszClassName = sClassName;
+	WndClass.lpszClassName = appName;
 	WndClass.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
 
 	if (!RegisterClassEx(&WndClass))
@@ -70,7 +70,6 @@ void ScreenGraphic::update()
 
 void ScreenGraphic::print()
 {
-
 }
 
 void ScreenGraphic::printText(int x, int y, const char* text)

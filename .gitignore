@@ -56,3 +56,4 @@ v14
 /obj/Win32.Debug/MAScreen
 /obj/Win32.Debug/MapaASCII
 /obj/Win32.Debug/Utils
+/MapaASCII/*.db

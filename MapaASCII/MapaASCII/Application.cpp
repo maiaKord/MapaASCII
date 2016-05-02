@@ -1,13 +1,14 @@
 #include "Application.h"
+#include "ScreenConsole.h"
+#include "ScreenGraphic.h"
 
 #define UP_LINES 4
-#define ALL_LINES 4 + UP_LINES
+#define ALL_LINES (4 + UP_LINES)
 
 Application::Application() 
 {
 	_cursor = {1,1};
 	_screen = nullptr;
-	_camera = { 0,0 };
 	_mapTile = nullptr;
 	_eRender = nullptr;
 }
@@ -27,10 +28,9 @@ Application::~Application()
 
 void Application::init()
 {
-	_settingsVP.load();
-
-	_screen = new Screen(_settingsVP.getScreenWidth(), _settingsVP.getScreenHeight());
-	_screen->init();
+	ScreenConsole* _screenConsole = new ScreenConsole();
+	_screenConsole->init();
+	_screen = _screenConsole;
 
 	_mapTile = new Map<char>;	// Tile represent the terrain material
 	_mapTile->init(1920, 1980);
@@ -62,10 +62,6 @@ void Application::init()
 		}
 	}
 
-	SVector2Df cameraF = Utils::convertGeoToMeters(SVector2Df(_settingsVP.getLeftLongitude(), _settingsVP.getSuperiorLatitude()));
-	_camera.x = (int)cameraF.x;
-	_camera.z = (int)cameraF.z;
-
 	_eRender = new EntityRenderer();
 	_eRender->render(_entityList, *_mapTile);
 }
@@ -77,7 +73,7 @@ void Application::update()
 
 	_screen->clear();
 	_screen->printText(1, 1, "Move the camera using 'W' 'A' 'S' 'D' keys ");
-	_mapTile->print( (_screen->getPixels() + (_screenWidth * UP_LINES)), _screenWidth, (_screenHeight - ALL_LINES) * _screenWidth, _camera);
+	_mapTile->print( (_screen->getPixels() + (_screenWidth * UP_LINES)), _screenWidth, (_screenHeight - ALL_LINES) * _screenWidth, _screen->getCamera());
 
 	// move the cursor in base of the keys up, down, right and left
 	if (GetAsyncKeyState(VK_UP))
@@ -94,16 +90,16 @@ void Application::update()
 
 	// move the camera
 	if (GetAsyncKeyState('W'))
-		_camera.y -= 1;
+		_screen->getCamera().y -= 1;
 
 	if (GetAsyncKeyState('S'))
-		_camera.y += 1;
+		_screen->getCamera().y += 1;
 
 	if (GetAsyncKeyState('D'))
-		_camera.x += 1;
+		_screen->getCamera().x += 1;
 
 	if (GetAsyncKeyState('A'))
-		_camera.x -= 1;
+		_screen->getCamera().x -= 1;
 
 	// check the limit and fix the position
 	_cursor.fixPosition(_screenWidth, _screenHeight);

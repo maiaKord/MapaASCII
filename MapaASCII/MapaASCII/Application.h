@@ -6,7 +6,6 @@
 #include "Map.h"
 #include "Screen.h"
 #include "Utils.h"
-#include "SettingsViewPort.h"
 #include "EntityLoader.h"
 #include "EntityRenderer.h"
 
@@ -36,9 +35,8 @@ struct Cursor
 struct Application
 {
 	Cursor _cursor;
-	SettingsViewPort _settingsVP;
 	Screen* _screen;
-	SVector2D _camera;
+
 	Map<char>* _mapTile;
 	std::vector<Entity*> _entityList;
 	EntityRenderer* _eRender;

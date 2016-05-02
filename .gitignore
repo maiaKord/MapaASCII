@@ -55,3 +55,4 @@ v14
 /Win32.Debug
 /obj/Win32.Debug/MAScreen
 /obj/Win32.Debug/MapaASCII
+/obj/Win32.Debug/Utils

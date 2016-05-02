@@ -1,29 +1,31 @@
 #pragma once
 #include <Windows.h>
+#include "SettingsViewPort.h"
 
 // This class manage the drawn space
 
 class Screen
 {
+	SettingsViewPort _settingsVP;
+	SVector2D _camera = { 0,0 };
+
+protected:
 	int _backBufferWidth = 0;
 	int _backBufferHeight = 0;
 	char* _pixels = nullptr;
-	HANDLE _hConsoleOut = nullptr;
 
 public:
-	Screen(int screenWidth, int screenHeight);
+	Screen();
 	~Screen();
 
-	void init();
-	
-	void print();
-	void printText(int x, int y, const char* text);
+	virtual void print() = 0;
+	virtual void printText(int x, int y, const char* text) = 0;
 
-	void clear();
+	virtual void clear() = 0;
 
 	// encapsulamiento
-
 	int getBackBufferWidth();
 	int getBackBufferHeight();
-	char* getPixels();
+	SVector2D& getCamera();
+	virtual char* getPixels();
 };
